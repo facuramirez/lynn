@@ -1,0 +1,69 @@
+body {
+  overflow-x: hidden;
+}
+
+.get-animation-dashboard {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100%;  
+  animation-name: dashboard-2-animation;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-duration: 800ms;
+}
+
+.get-animation-dashboard-fast {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100%;  
+  animation-name: dashboard-2-animation;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-duration: 0s;
+}
+
+@keyframes dashboard-2-animation {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0;    
+  }
+}
+
+.get-animation-dashboard-out {  
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-name: dashboard-2-animation-out;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-duration: 800ms;
+}
+
+.get-animation-dashboard-out-fast {  
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-name: dashboard-2-animation-out;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-duration: 0s;
+}
+
+@keyframes dashboard-2-animation-out {
+  from {
+    left: 0;
+    display: block;    
+  }
+  to {
+    left: 100%; 
+    display: none;
+  }
+}

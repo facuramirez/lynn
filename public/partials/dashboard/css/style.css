@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+/* Primer fila */
+.titulo {
+  grid-column: 1;
+  align-self: center;
+}
+
+.buscador {
+  grid-column: 2;
+  justify-self: end;
+}
+
+/* Segunda fila */
+.contenido {
+  grid-column: 1 / -1;
+  background-color: white;
+  padding: 1rem;
+  overflow: auto;
+  border: 1px solid #ccc;
+}

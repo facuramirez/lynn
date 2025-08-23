@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Prueba Telerik</title>
+
+    <link href="https://kendo.cdn.telerik.com/themes/11.0.2/default/default-main.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+
+    <!-- Add the Kendo library by either using the JAVASCRIPT MODULES -->
+    <script src="https://kendo.cdn.telerik.com/2025.2.702/mjs/kendo.all.js" type="module"></script>
+
+    <!-- OR by using the BUNDLED JAVASCRIPT -->
+
+    <script src="https://kendo.cdn.telerik.com/2025.2.702/js/kendo.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <el-dialog">
+        <dialog id="dialog-monitoring" aria-labelledby="dialog-title"
+            class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+            <el-dialog-backdrop
+                class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+
+            <div tabindex="0"
+                class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+                <el-dialog-panel
+                    class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+                    <div id="container-monitoring" class="min-h-fit p-4 md:p-6 flex flex-col gap-6">
+                        <div class="flex flex-row justify-between cursor-pointer command=" close" commandfor="dialog">
+                            <span class="text-[clamp(1rem,1vw,1vw)]">Seleccione el grupo de trabajo</span>
+                            <svg id="close-monitoring" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="none" viewBox="0 0 24 24" stroke="#9CA3AF">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <div class="w-full flex items-center justify-center text-center">
+                            <div class="relative w-full max-w-md">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </div>
+                                <input id="search-monitoring-input" type="text" placeholder="Buscar..."
+                                    class="bg-white focus:outline-none w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm" />
+                            </div>
+                        </div>
+
+                        <ul id="monitoring-list" class="[&>li]:cursor-pointer">
+                            <li id="wish_list"
+                                class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                <span class="">Wish Lists</span>
+                                <p class="text-[gray]">2 Notes</p>
+                                <!-- <input type="radio" id="wish_list" name="tareas" checked
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 mt-1 mr-3 h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                    <title>Check en círculo</title>
+                                    <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                    <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            <li id="books"
+                                class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                <span>Books</span>
+                                <p class="text-[gray]">3 Notes</p>
+                                <!-- <input type="radio" id="books" name="tareas"
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 mt-1 mr-3 h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                    <title>Check en círculo</title>
+                                    <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                    <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </li>
+                            <li id="ilustration"
+                                class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                <span>Ilustración</span>
+                                <p class="text-[gray]">2 Notes</p>
+                                <!-- <input type="radio" id="ilustration" name="tareas"
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 mt-1 mr-3 h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                    <title>Check en círculo</title>
+                                    <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                    <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </li>
+                            <li id="design_inspiration"
+                                class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                <span>Design Inspiration</span>
+                                <p class="text-[gray]">2 Notes</p>
+                                <!-- <input type="radio" id="design_inspiration" name="tareas"
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 mt-1 mr-3 h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                    <title>Check en círculo</title>
+                                    <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                    <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </li>
+                            <li id="other"
+                                class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                <span>Other</span>
+                                <p class="text-[gray]">2 Notes</p>
+                                <!-- <input type="radio" id="other" name="tareas"
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 mt-1 mr-3 h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                    <title>Check en círculo</title>
+                                    <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                    <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor" stroke-width="2.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </li>
+                        </ul>
+                        <button id="button-ok-monitoring"
+                            class="bg-[#8245BF] text-[clamp(1rem,1vw,1vw)] text-white w-fit mx-auto py-1 px-3 rounded-lg disabled opacity-50 cursor-not-allowed">OK</button>
+                    </div>
+                </el-dialog-panel>
+            </div>
+        </dialog>
+        </el-dialog>
+
+        <el-dialog>
+            <dialog id="dialog-interactions" aria-labelledby="dialog-title"
+                class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
+                <el-dialog-backdrop
+                    class="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+
+                <div tabindex="0"
+                    class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
+                    <el-dialog-panel
+                        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+                        <div id="container-interactions" class="min-h-fit p-4 md:p-6 flex flex-col gap-6">
+                            <div class="flex flex-row justify-between cursor-pointer command=" close"
+                                commandfor="dialog">
+                                <span class="text-[clamp(1rem,1vw,1vw)]">Seleccione el grupo de trabajo</span>
+                                <svg id="close-interactions" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="none" viewBox="0 0 24 24" stroke="#9CA3AF">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </div>
+                            <div class="w-full flex items-center justify-center text-center">
+                                <div class="relative w-full max-w-md">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                        </svg>
+                                    </div>
+                                    <input id="search-interactions-input" type="text" placeholder="Buscar..."
+                                        class="bg-white focus:outline-none w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md shadow-sm" />
+                                </div>
+                            </div>
+                            <div class="relative flex flex-row justify-between gap-2">
+                                <span class="absolute right-10 top-1/2 -translate-y-1/2 mt-1">Seleccionar/quitar
+                                    todos</span><input type="checkbox" id="all"
+                                    class="absolute right-0 top-1/2 -translate-y-1/2 mt-1 mr-3 h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                            </div>
+                            <ul id="interactions-list" class="[&>li]:cursor-pointer">
+                                <li id="wish_list"
+                                    class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                    <span class="">Wish Lists</span>
+                                    <p class="text-[gray]">2 Notes</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                        fill="none"
+                                        class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                        <title>Check en círculo</title>
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                        <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </li>
+                                <li id="books"
+                                    class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                    <span>Books</span>
+                                    <p class="text-[gray]">3 Notes</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                        fill="none"
+                                        class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                        <title>Check en círculo</title>
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                        <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+
+                                </li>
+                                <li id="ilustration"
+                                    class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                    <span>Ilustración</span>
+                                    <p class="text-[gray]">2 Notes</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                        fill="none"
+                                        class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                        <title>Check en círculo</title>
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                        <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </li>
+                                <li id="design_inspiration"
+                                    class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                    <span>Design Inspiration</span>
+                                    <p class="text-[gray]">2 Notes</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                        fill="none"
+                                        class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                        <title>Check en círculo</title>
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                        <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </li>
+                                <li id="other"
+                                    class="relative flex flex-col gap-1 p-2 border-b border-b-1 border-[#ccc] hover:bg-[#8245BF] hover:[&>span]:text-white rounded-md transition">
+                                    <span>Other</span>
+                                    <p class="text-[gray]">2 Notes</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                        fill="none"
+                                        class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 hidden">
+                                        <title>Check en círculo</title>
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" />
+                                        <path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="currentColor"
+                                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </li>
+                            </ul>
+                            <button id="button-ok-interactions"
+                                class="bg-[#8245BF] text-[clamp(1rem,1vw,1vw)] text-white w-fit mx-auto py-1 px-3 rounded-lg disabled opacity-50 cursor-not-allowed">OK</button>
+                        </div>
+                        <!-- <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button type="button" command="close" commandfor="dialog"
+                            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto">Deactivate</button>
+                        <button type="button" command="close" commandfor="dialog"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
+                    </div> -->
+                    </el-dialog-panel>
+                </div>
+            </dialog>
+        </el-dialog>
+
+
+        <div id="dashboard-1"
+            class="relative min-h-screen px-[clamp(1.5rem,2vw,2vw)] lg:px-[clamp(7rem,7vw,7vw)] py-[clamp(4rem,4vh,4vh)] bg-[url('./assets/img/fondo6.png')] bg-no-repeat bg-cover bg-bottom">
+            <div class="z-10 overlay absolute left-0 top-0 w-full min-h-dvh h-full bg-black/30 pointer-events-none">
+            </div>
+            <div class="relative z-20  grid grid-cols-1 gap-8">
+                <div class="flex flex-col md:flex-row justify-between gap-8">
+                    <div class="col-span-1 flex items-center justify-center md:justify-start basis-6/10">
+                        <h1 class="text-[clamp(2.4rem,2.5vw,2.5vw)] font-bold text-white min-w-fit">
+                            Supervisor Dashboard
+                        </h1>
+                    </div>
+
+                    <div class="col-span-1 flex items-center justify-center md:justify-end text-center basis-4/10">
+                        <div class="relative w-full max-w-md">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input id="group-search-input" type="text" placeholder="Buscar..."
+                                class="bg-white focus:outline-none w-full pl-10 pr-4 py-3 border border-gray-300 rounded-md shadow-sm" />
+                        </div>
+                    </div>
+                </div>
+
+                <main class="pt-10 rounded-3xl [&_*]:text-[#959595]">
+                    <div id="grid-cards"
+                        class="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] [*>div]:min-h-fit gap-8 justify-items-center [&>div]:cursor-pointer">
+                        <div id="monitoring" command="show-modal" commandfor="dialog-monitoring"
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M56.25 58.125H5.625C4.63044 58.125 3.67661 57.7299 2.97335 57.0266C2.27009 56.3234 1.875 55.3696 1.875 54.375V3.75C1.875 3.25272 2.07254 2.77581 2.42417 2.42417C2.77581 2.07254 3.25272 1.875 3.75 1.875C4.24728 1.875 4.72419 2.07254 5.07583 2.42417C5.42746 2.77581 5.625 3.25272 5.625 3.75V54.375H56.25C56.7473 54.375 57.2242 54.5725 57.5758 54.9242C57.9275 55.2758 58.125 55.7527 58.125 56.25C58.125 56.7473 57.9275 57.2242 57.5758 57.5758C57.2242 57.9275 56.7473 58.125 56.25 58.125Z"
+                                    fill="#959595" />
+                                <path
+                                    d="M18.2812 50.625H13.5938C12.4749 50.625 11.4018 50.1805 10.6106 49.3894C9.81947 48.5982 9.375 47.5251 9.375 46.4062V28.5938C9.375 27.4749 9.81947 26.4018 10.6106 25.6106C11.4018 24.8195 12.4749 24.375 13.5938 24.375H18.2812C19.4001 24.375 20.4732 24.8195 21.2644 25.6106C22.0555 26.4018 22.5 27.4749 22.5 28.5938V46.4062C22.5 47.5251 22.0555 48.5982 21.2644 49.3894C20.4732 50.1805 19.4001 50.625 18.2812 50.625ZM35.1562 50.625H30.4688C29.3499 50.625 28.2768 50.1805 27.4856 49.3894C26.6945 48.5982 26.25 47.5251 26.25 46.4062V22.9688C26.25 21.8499 26.6945 20.7768 27.4856 19.9856C28.2768 19.1945 29.3499 18.75 30.4688 18.75H35.1562C36.2751 18.75 37.3482 19.1945 38.1394 19.9856C38.9305 20.7768 39.375 21.8499 39.375 22.9688V46.4062C39.375 47.5251 38.9305 48.5982 38.1394 49.3894C37.3482 50.1805 36.2751 50.625 35.1562 50.625ZM51.9891 50.625H47.3016C46.1827 50.625 45.1096 50.1805 44.3185 49.3894C43.5273 48.5982 43.0828 47.5251 43.0828 46.4062V15.4688C43.0828 14.3499 43.5273 13.2768 44.3185 12.4856C45.1096 11.6945 46.1827 11.25 47.3016 11.25H51.9891C53.1079 11.25 54.181 11.6945 54.9722 12.4856C55.7633 13.2768 56.2078 14.3499 56.2078 15.4688V46.4062C56.2078 47.5251 55.7633 48.5982 54.9722 49.3894C54.181 50.1805 53.1079 50.625 51.9891 50.625Z" />
+                            </svg>
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Monitorear Grupo de Trabajo
+                            </h3>
+                        </div>
+
+                        <div id="interactions" command="show-modal" commandfor="dialog-interactions"
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns=" http://www.w3.org/2000/svg">
+                                <path
+                                    d="M58 24C58 22.9391 57.5786 21.9217 56.8284 21.1716C56.0783 20.4214 55.0609 20 54 20H46V12C46 10.9391 45.5786 9.92172 44.8284 9.17157C44.0783 8.42143 43.0609 8 42 8H10C8.93913 8 7.92172 8.42143 7.17157 9.17157C6.42143 9.92172 6 10.9391 6 12V44C6.00117 44.3763 6.10847 44.7446 6.30956 45.0626C6.51064 45.3806 6.79737 45.6355 7.13678 45.7979C7.4762 45.9603 7.85455 46.0236 8.22836 45.9807C8.60217 45.9377 8.95628 45.7902 9.25 45.555L18 38.5V46C18 47.0609 18.4214 48.0783 19.1716 48.8284C19.9217 49.5786 20.9391 50 22 50H45.3975L54.75 57.555C55.1039 57.8413 55.5448 57.9982 56 58C56.5304 58 57.0391 57.7893 57.4142 57.4142C57.7893 57.0391 58 56.5304 58 56V24ZM47.3625 46.445C47.0086 46.1587 46.5677 46.0018 46.1125 46H22V38H42C43.0609 38 44.0783 37.5786 44.8284 36.8284C45.5786 36.0783 46 35.0609 46 34V24H54V51.8125L47.3625 46.445Z" />
+                            </svg>
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Administrar Interacciones
+                            </h3>
+                        </div>
+
+
+                        <div
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M45.3333 40C43.4666 40 41.8888 39.3555 40.5999 38.0667C39.311 36.7778 38.6666 35.2 38.6666 33.3333C38.6666 31.4667 39.311 29.8889 40.5999 28.6C41.8888 27.3111 43.4666 26.6667 45.3333 26.6667C47.1999 26.6667 48.7777 27.3111 50.0666 28.6C51.3555 29.8889 51.9999 31.4667 51.9999 33.3333C51.9999 35.2 51.3555 36.7778 50.0666 38.0667C48.7777 39.3555 47.1999 40 45.3333 40ZM31.9999 50.6667V49.6C31.9999 48.5333 32.2781 47.5449 32.8346 46.6347C33.391 45.7244 34.1795 45.0684 35.1999 44.6667C36.7999 44 38.4559 43.5004 40.1679 43.168C41.8799 42.8355 43.6017 42.6684 45.3333 42.6667C47.0648 42.6649 48.7875 42.832 50.5013 43.168C52.215 43.504 53.8701 44.0035 55.4666 44.6667C56.4888 45.0667 57.2781 45.7227 57.8346 46.6347C58.391 47.5467 58.6684 48.5351 58.6666 49.6V50.6667C58.6666 51.4222 58.4106 52.056 57.8986 52.568C57.3866 53.08 56.7537 53.3351 55.9999 53.3333H34.6666C33.911 53.3333 33.2781 53.0773 32.7679 52.5653C32.2577 52.0533 32.0017 51.4204 31.9999 50.6667ZM26.6666 32C23.7333 32 21.2221 30.9555 19.1333 28.8667C17.0444 26.7778 15.9999 24.2667 15.9999 21.3333C15.9999 18.4 17.0444 15.8889 19.1333 13.8C21.2221 11.7111 23.7333 10.6667 26.6666 10.6667C29.5999 10.6667 32.111 11.7111 34.1999 13.8C36.2888 15.8889 37.3333 18.4 37.3333 21.3333C37.3333 24.2667 36.2888 26.7778 34.1999 28.8667C32.111 30.9555 29.5999 32 26.6666 32ZM5.33325 45.8667C5.33325 44.3555 5.71103 42.9671 6.46659 41.7013C7.22214 40.4355 8.26659 39.4684 9.59992 38.8C12.2666 37.4667 15.0337 36.4444 17.9013 35.7333C20.7688 35.0222 23.6906 34.6667 26.6666 34.6667C28.2221 34.6667 29.7777 34.8 31.3333 35.0667C32.8888 35.3333 34.4444 35.6444 35.9999 36L33.7333 38.2667L31.4666 40.5333C30.6666 40.3111 29.8666 40.1671 29.0666 40.1013C28.2666 40.0355 27.4666 40.0018 26.6666 40C24.0888 40 21.5661 40.3111 19.0986 40.9333C16.631 41.5555 14.2648 42.4444 11.9999 43.6C11.5555 43.8222 11.2221 44.1333 10.9999 44.5333C10.7777 44.9333 10.6666 45.3778 10.6666 45.8667V48H26.6666V50.6C26.6666 51.1778 26.7777 51.7004 26.9999 52.168C27.2221 52.6355 27.5333 53.024 27.9333 53.3333H10.6666C9.19992 53.3333 7.94481 52.8115 6.90125 51.768C5.8577 50.7244 5.33503 49.4684 5.33325 48V45.8667ZM26.6666 26.6667C28.1333 26.6667 29.3893 26.1449 30.4346 25.1013C31.4799 24.0578 32.0017 22.8018 31.9999 21.3333C31.9981 19.8649 31.4764 18.6098 30.4346 17.568C29.3928 16.5262 28.1368 16.0035 26.6666 16C25.1964 15.9964 23.9413 16.5191 22.9013 17.568C21.8613 18.6169 21.3386 19.872 21.3333 21.3333C21.3279 22.7947 21.8506 24.0507 22.9013 25.1013C23.9519 26.152 25.207 26.6738 26.6666 26.6667Z" />
+                            </svg>
+
+
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Supervisor</h3>
+                        </div>
+
+
+                        <div
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.3333 56C11.8667 56 10.6116 55.4782 9.568 54.4347C8.52444 53.3911 8.00178 52.1351 8 50.6667V13.3333C8 11.8667 8.52267 10.6116 9.568 9.568C10.6133 8.52444 11.8684 8.00178 13.3333 8H24C25.4667 8 26.7227 8.52267 27.768 9.568C28.8133 10.6133 29.3351 11.8684 29.3333 13.3333V50.6667C29.3333 52.1333 28.8116 53.3893 27.768 54.4347C26.7244 55.48 25.4684 56.0018 24 56H13.3333ZM40 56C38.5333 56 37.2782 55.4782 36.2347 54.4347C35.1911 53.3911 34.6684 52.1351 34.6667 50.6667V37.3333C34.6667 35.8667 35.1893 34.6116 36.2347 33.568C37.28 32.5244 38.5351 32.0018 40 32H50.6667C52.1333 32 53.3893 32.5227 54.4347 33.568C55.48 34.6133 56.0018 35.8684 56 37.3333V50.6667C56 52.1333 55.4782 53.3893 54.4347 54.4347C53.3911 55.48 52.1351 56.0018 50.6667 56H40ZM40 26.6667C38.5333 26.6667 37.2782 26.1449 36.2347 25.1013C35.1911 24.0578 34.6684 22.8018 34.6667 21.3333V13.3333C34.6667 11.8667 35.1893 10.6116 36.2347 9.568C37.28 8.52444 38.5351 8.00178 40 8H50.6667C52.1333 8 53.3893 8.52267 54.4347 9.568C55.48 10.6133 56.0018 11.8684 56 13.3333V21.3333C56 22.8 55.4782 24.056 54.4347 25.1013C53.3911 26.1467 52.1351 26.6684 50.6667 26.6667H40Z" />
+                            </svg>
+
+
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Reportes</h3>
+                        </div>
+
+
+                        <div
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M49.9199 39.36C50.8532 37.0934 51.3599 34.6667 51.3599 32C51.3599 30.08 51.0666 28.24 50.5599 26.5334C48.8266 26.9334 47.0132 27.1467 45.1199 27.1467C41.2425 27.1508 37.4209 26.2227 33.9773 24.4406C30.5337 22.6585 27.5691 20.0746 25.3333 16.9067C22.9438 22.6953 18.4312 27.3511 12.7199 29.92C12.6133 30.5867 12.6133 31.3067 12.6133 32C12.6133 34.5459 13.1147 37.0669 14.089 39.419C15.0632 41.7711 16.4913 43.9082 18.2915 45.7085C21.9272 49.3442 26.8583 51.3867 31.9999 51.3867C34.7999 51.3867 37.4933 50.7733 39.9199 49.68C41.4399 52.5867 42.1332 54.0267 42.0799 54.0267C37.7066 55.4934 34.3199 56.2134 31.9999 56.2134C25.5466 56.2134 19.3866 53.68 14.8533 49.12C12.0934 46.3732 10.0433 42.996 8.87992 39.28H5.33325V27.1467H8.23992C9.12056 22.8601 11.1452 18.8918 14.0991 15.6629C17.0529 12.4341 20.8258 10.0651 25.0173 8.80738C29.2088 7.54965 33.6627 7.45008 37.9062 8.51924C42.1498 9.5884 46.0247 11.7864 49.1199 14.88C52.4793 18.2282 54.7714 22.4968 55.7066 27.1467H58.6666V39.28H58.5066L49.0132 48L34.8799 46.4V41.9467H47.7599L49.9199 39.36ZM24.7199 31.3867C25.5199 31.3867 26.2932 31.7067 26.8533 32.2934C27.416 32.8607 27.7318 33.6275 27.7318 34.4267C27.7318 35.2258 27.416 35.9926 26.8533 36.56C26.2932 37.12 25.5199 37.44 24.7199 37.44C23.0399 37.44 21.6799 36.1067 21.6799 34.4267C21.6799 32.7467 23.0399 31.3867 24.7199 31.3867ZM39.2533 31.3867C40.9333 31.3867 42.2666 32.7467 42.2666 34.4267C42.2666 36.1067 40.9333 37.44 39.2533 37.44C37.5732 37.44 36.2132 36.1067 36.2132 34.4267C36.2132 33.6204 36.5335 32.8472 37.1036 32.2771C37.6738 31.707 38.447 31.3867 39.2533 31.3867Z" />
+                            </svg>
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Agentes</h3>
+                        </div>
+
+
+                        <div
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M49.9199 39.36C50.8532 37.0934 51.3599 34.6667 51.3599 32C51.3599 30.08 51.0666 28.24 50.5599 26.5334C48.8266 26.9334 47.0132 27.1467 45.1199 27.1467C41.2425 27.1508 37.4209 26.2227 33.9773 24.4406C30.5337 22.6585 27.5691 20.0746 25.3333 16.9067C22.9438 22.6953 18.4312 27.3511 12.7199 29.92C12.6133 30.5867 12.6133 31.3067 12.6133 32C12.6133 34.5459 13.1147 37.0669 14.089 39.419C15.0632 41.7711 16.4913 43.9082 18.2915 45.7085C21.9272 49.3442 26.8583 51.3867 31.9999 51.3867C34.7999 51.3867 37.4933 50.7733 39.9199 49.68C41.4399 52.5867 42.1332 54.0267 42.0799 54.0267C37.7066 55.4934 34.3199 56.2134 31.9999 56.2134C25.5466 56.2134 19.3866 53.68 14.8533 49.12C12.0934 46.3732 10.0433 42.996 8.87992 39.28H5.33325V27.1467H8.23992C9.12056 22.8601 11.1452 18.8918 14.0991 15.6629C17.0529 12.4341 20.8258 10.0651 25.0173 8.80738C29.2088 7.54965 33.6627 7.45008 37.9062 8.51924C42.1498 9.5884 46.0247 11.7864 49.1199 14.88C52.4793 18.2282 54.7714 22.4968 55.7066 27.1467H58.6666V39.28H58.5066L49.0132 48L34.8799 46.4V41.9467H47.7599L49.9199 39.36ZM24.7199 31.3867C25.5199 31.3867 26.2932 31.7067 26.8533 32.2934C27.416 32.8607 27.7318 33.6275 27.7318 34.4267C27.7318 35.2258 27.416 35.9926 26.8533 36.56C26.2932 37.12 25.5199 37.44 24.7199 37.44C23.0399 37.44 21.6799 36.1067 21.6799 34.4267C21.6799 32.7467 23.0399 31.3867 24.7199 31.3867ZM39.2533 31.3867C40.9333 31.3867 42.2666 32.7467 42.2666 34.4267C42.2666 36.1067 40.9333 37.44 39.2533 37.44C37.5732 37.44 36.2132 36.1067 36.2132 34.4267C36.2132 33.6204 36.5335 32.8472 37.1036 32.2771C37.6738 31.707 38.447 31.3867 39.2533 31.3867Z" />
+                            </svg>
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Habilidades</h3>
+                        </div>
+
+                        <div
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M32 32C36.9946 32 41.52 33.6533 44.84 35.9653C47.9946 38.1653 50.6666 41.4347 50.6666 44.952C50.6666 46.8827 49.8426 48.4827 48.544 49.672C47.3226 50.7947 45.728 51.5227 44.0853 52.0187C40.8026 53.0133 36.48 53.3333 32 53.3333C27.52 53.3333 23.1973 53.0133 19.9146 52.0187C18.272 51.5227 16.6773 50.7947 15.4533 49.672C14.16 48.4853 13.3333 46.8853 13.3333 44.9547C13.3333 41.4373 16.0053 38.168 19.16 35.968C22.48 33.6533 27.0053 32 32 32ZM50.6666 34.6667C53.4506 34.6667 55.9786 35.5867 57.848 36.888C59.5546 38.08 61.3333 40.0613 61.3333 42.4773C61.3333 43.856 60.7333 45 59.84 45.8187C59.024 46.568 58.016 47.008 57.096 47.2853C55.8426 47.664 54.3626 47.8587 52.8266 47.944C53.152 47.024 53.3333 46.024 53.3333 44.952C53.3333 40.8587 50.776 37.3813 47.9146 34.968C48.8184 34.7684 49.7411 34.6673 50.6666 34.6667ZM13.3333 34.6667C14.288 34.6702 15.2053 34.7707 16.0853 34.968C13.2266 37.3813 10.6666 40.8587 10.6666 44.952C10.6666 46.024 10.848 47.024 11.1733 47.944C9.63729 47.8587 8.15996 47.664 6.90396 47.2853C5.98396 47.008 4.97596 46.568 4.15729 45.8187C3.68803 45.3983 3.31272 44.8836 3.05586 44.3083C2.79899 43.733 2.66636 43.11 2.66663 42.48C2.66663 40.0667 4.44263 38.0827 6.15196 36.8907C8.26625 35.4412 10.7699 34.6659 13.3333 34.6667ZM49.3333 18.6667C51.1014 18.6667 52.7971 19.369 54.0473 20.6193C55.2976 21.8695 56 23.5652 56 25.3333C56 27.1014 55.2976 28.7971 54.0473 30.0474C52.7971 31.2976 51.1014 32 49.3333 32C47.5652 32 45.8695 31.2976 44.6192 30.0474C43.369 28.7971 42.6666 27.1014 42.6666 25.3333C42.6666 23.5652 43.369 21.8695 44.6192 20.6193C45.8695 19.369 47.5652 18.6667 49.3333 18.6667ZM14.6666 18.6667C16.4347 18.6667 18.1304 19.369 19.3807 20.6193C20.6309 21.8695 21.3333 23.5652 21.3333 25.3333C21.3333 27.1014 20.6309 28.7971 19.3807 30.0474C18.1304 31.2976 16.4347 32 14.6666 32C12.8985 32 11.2028 31.2976 9.95258 30.0474C8.70234 28.7971 7.99996 27.1014 7.99996 25.3333C7.99996 23.5652 8.70234 21.8695 9.95258 20.6193C11.2028 19.369 12.8985 18.6667 14.6666 18.6667ZM32 8C34.8289 8 37.542 9.12381 39.5424 11.1242C41.5428 13.1246 42.6666 15.8377 42.6666 18.6667C42.6666 21.4956 41.5428 24.2087 39.5424 26.2091C37.542 28.2095 34.8289 29.3333 32 29.3333C29.171 29.3333 26.4579 28.2095 24.4575 26.2091C22.4571 24.2087 21.3333 21.4956 21.3333 18.6667C21.3333 15.8377 22.4571 13.1246 24.4575 11.1242C26.4579 9.12381 29.171 8 32 8Z" />
+                            </svg>
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Grupos de Trabajo</h3>
+                        </div>
+
+                        <div
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M0 17.76C0.56 17.88 1.12 18.02 1.68 18.2C2.52 18.5 3.4 18.76 4.26 19C4.32 23.28 4.26 27.58 4.28 31.86C4.24 33.64 5.64 35.3 7.32 35.76C9.12 36.02 10.92 35.84 12.74 35.92C12.74 37.28 12.74 38.64 12.74 40.02C10.78 40.02 8.82 40.16 6.88 39.94C3.14 39.26 0 35.72 0 31.88C0 27.18 0 22.46 0 17.76Z" />
+                                <path
+                                    d="M28.8599 25.26C29.0799 21 33.0399 17.72 37.1599 17.54C39.8399 17.7 42.5599 18.82 44.0999 21.1C45.4799 22.78 45.6799 25.02 45.7599 27.08C45.7599 31.36 45.7599 35.62 45.7599 39.9C44.3199 39.64 42.9399 39.16 41.5799 38.66C41.5399 34.46 41.6199 30.28 41.5599 26.1C41.5599 23.96 39.7999 21.98 37.6399 21.8C35.2199 21.5 32.8999 23.7 33.0199 26.14C33.0199 30.3 33.0199 34.46 33.0199 38.62C31.6199 39.14 30.1999 39.58 28.7999 40.02C28.7999 35.1 28.7399 30.18 28.8199 25.26H28.8599Z" />
+                                <path
+                                    d="M12.08 18.52C12.94 18.22 13.82 17.98 14.7 17.76C14.76 19.34 14.56 20.94 14.8 22.52C15.72 24.26 17.42 25.36 18.94 26.5C20.58 25.44 22.06 24.12 23.2 22.52C23.2 21.34 23.2 20.16 23.24 19C24.66 18.68 25.98 18 27.44 17.78C27.44 19.5 27.44 21.22 27.4 22.96C26.56 26.32 23.6 28.4 20.96 30.32C21.02 33.56 20.98 36.8 20.96 40.04C19.6 39.58 18.24 39.12 16.88 38.64C16.88 35.88 16.94 33.12 16.86 30.36C15.4 28.86 13.36 27.9 12.12 26.14C10.38 24.2 10.34 21.48 10.48 19.02C11 18.86 11.54 18.7 12.06 18.54L12.08 18.52Z" />
+                                <path
+                                    d="M51.1599 18.84C53.1799 17.52 55.7799 17.58 58.0799 18C61.3199 19.04 63.9999 22.18 63.9999 25.68C63.9999 30.48 63.9999 35.26 63.9999 40.06C62.5799 39.58 61.1399 39.08 59.7199 38.56C59.7199 34.44 59.7199 30.3 59.7199 26.16C59.8599 24.3 58.5799 22.18 56.5999 22.04C55.3199 21.96 53.7399 21.76 52.7999 22.84C51.5599 23.86 51.2799 25.58 51.2799 27.1C51.2799 30.94 51.2799 34.8 51.2799 38.64C49.9199 39.1 48.5599 39.56 47.2199 40.04C47.2199 35.24 47.2199 30.46 47.2199 25.66C47.1399 22.86 48.8999 20.3 51.2199 18.84H51.1599Z" />
+                            </svg>
+
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Acceso a Lynn</h3>
+                        </div>
+
+                        <div
+                            class="group card bg-blue-50 rounded-sm p-4 transform hover:shadow-[0px_6px_8px_rgba(0,0,0,0.5)] [&_svg]:fill-[#959595] hover:[&_svg]:fill-[#8245BF] flex flex-col justify-evenly items-center text-center w-full max-w-[300px] min-h-[200px]">
+                            <svg width="58" height="58" viewBox="0 0 58 58" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.25 50.75H50.75C54.7488 50.75 58 47.4988 58 43.5V16.3125C58 12.3137 54.7488 9.0625 50.75 9.0625H33.8371C33.0555 9.0625 32.2852 8.81328 31.6621 8.3375L27.3121 5.075C26.0547 4.13477 24.5254 3.625 22.9621 3.625H7.25C3.25117 3.625 0 6.87617 0 10.875V43.5C0 47.4988 3.25117 50.75 7.25 50.75Z" />
+                            </svg>
+
+                            <h3
+                                class="text-[clamp(1rem,1vw,1vw)] font-bold text-green-800 group-hover:text-[#8245BF] mb-3">
+                                Carpeta de Contactos</h3>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <section id="dashboard-2"
+            class="z-40 hidden fixed top-0 left-full w-full min-h-dvh bg-[#E9E9EF] flex flex-col p-[clamp(1rem,1vw,1vw)]">
+            <div class="flex flex-row justify-between items-center border-b border-[#ccc] mb-5">
+                <div id="container-title-dashboard-2" class="flex flex-row gap-4 items-center mb-3">
+                    <h1 id="work-group-title" class="text-[clamp(2rem,2vw,2vw)] font-bold">Grupo de Trabajo:</h1>
+                    <div id="work-groups-container" class="flex flex-row gap-2">
+                    </div>
+                    <svg width="800px" height="800px" viewBox="0 0 91 91" enable-background="new 0 0 91 91"
+                        id="edit-work-groups" class="size-8 translate-y-[2px] cursor-pointer" version="1.1"
+                        xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g>
+                            <g>
+                                <path
+                                    d="M24.018,49.415L42.149,67.54l38.119-38.122L62.145,11.292L24.018,49.415z M66.444,25.118    c1.259,1.262,1.259,3.306,0,4.566L44.369,51.753c-0.629,0.633-1.455,0.946-2.278,0.946c-0.831,0-1.655-0.313-2.284-0.946    c-1.261-1.262-1.261-3.305,0-4.565l22.072-22.07C63.138,23.857,65.183,23.857,66.444,25.118z"
+                                    fill="#6EC4A7" />
+                                <polygon fill="#65B794" points="15.72,75.578 35.863,70.393 21.111,55.641   " />
+                                <path
+                                    d="M87.621,12.533l-8.593-8.596c-2.548-2.546-6.992-2.543-9.53,0L66.706,6.73l18.129,18.124l2.786-2.788    C90.244,19.436,90.244,15.159,87.621,12.533z"
+                                    fill="#65B794" />
+                            </g>
+                            <path
+                                d="M79.585,89.554H3.461c-1.833,0-3.318-1.486-3.318-3.319V5.512c0-1.833,1.484-3.318,3.318-3.318h51.113   c1.835,0,3.317,1.485,3.317,3.318c0,1.832-1.482,3.318-3.317,3.318H6.779v74.086h72.806c2.592,0,4.701-2.108,4.701-4.701V36.588   c0-1.833,1.484-3.318,3.317-3.318c1.832,0,3.318,1.485,3.318,3.318v41.627C90.922,84.467,85.836,89.554,79.585,89.554z"
+                                fill="#647F94" />
+                        </g>
+                    </svg>
+                </div>
+                <svg id="close-dashboard-2" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none"
+                    class="cursor-pointer" viewBox="0 0 24 24" stroke="#9CA3AF">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <div class="w-full bg-[#eee] px-4 pb-4 pt-2">
+                <span class="text-black my-1 font-bold block mb-3 text-[clamp(1.3rem,1.3vw,1.3vw)]">Standard Supervisor
+                    Dashboard</span>
+                <div class="w-full h-full grid grid-cols-12 gap-4">
+                    <article
+                        class="bg-white col-span-12 md:col-span-6 xl:col-span-3 flex flex-col items-center justify-between w-full p-4">
+                        <span class="text-center text-[1.3rem] text-[gray] font-bold">Service Level (This Month)</span>
+                        <div class="flex flex-col gap-2 w-full ">
+                            <span class="text-center text-[2.5rem] font-extrabold">80%</span>
+                            <div id="gauge" class="w-full"></div>
+                        </div>
+                        <div></div>
+                    </article>
+                    <article class="bg-white col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-2">
+                        <div id="donut-chart-1" style="width: 100%; height: 250px;"></div>
+                    </article>
+                    <article class="bg-white col-span-12 sm:col-span-6 md:col-span-3 xl:col-span-2">
+                        <div id="donut-chart-2" style="width: 100%; height: 250px;"></div>
+                    </article>
+                    <article class="bg-white col-span-12 xl:col-span-5 flex flex-col gap-3 p-2">
+                        <div class="grid grid-cols-2 h-9/10">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-[1rem]">Metrics (now)</span>
+                                <div class="grid grid-cols-2 my-auto">
+                                    <div class="flex flex-col gap-4 h-fit">
+                                        <div class="flex flex-col">
+                                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Signed
+                                                In</span>
+                                            <span class="text-center text-[2.2rem] font-extrabold">227</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Ready</span>
+                                            <span class="text-center text-[2.2rem] font-extrabold">118</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-4 h-fit">
+                                        <div class="flex flex-col">
+                                            <span class="text-center text-[1.2rem] text-[gray] font-bold">On Call</span>
+                                            <span class="text-center text-[2.2rem] font-extrabold">35</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Not
+                                                Ready</span>
+                                            <span class="text-center text-[2.2rem] font-extrabold">46</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display:flex; justify-content:center; align-items:center;">
+                                <div id="pie-chart" style="width:290px; height:290px;"></div>
+                            </div>
+                            <!-- <div id="pie-chart" style="width: 100%; height: 250px;"></div> -->
+
+                        </div>
+                    </article>
+                    <article class="bg-white col-span-12 lg:col-span-7">
+                        <div id="mi-tabla-kendo"></div>
+                    </article>
+                    <article class="bg-white col-span-12 lg:col-span-5">
+                        <div id="horizontal-bar-chart" style="width:100%; height:300px;"></div>
+                    </article>
+                </div>
+            </div>
+            <div class="w-full bg-[#eee] px-4 pb-4 pt-2 mt-4">
+                <span class="text-black my-1 font-bold block mb-3 text-[clamp(1.3rem,1.3vw,1.3vw)]">Metrics (This Month
+                    vs Last Month)</span>
+                <div class="w-full h-full grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Offered</span>
+                            <span class="text-center text-[2.5rem] font-extrabold">1263</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">-74%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <span class="translate-y-3 font-bold">2208</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Accepted</span>
+                            <span class="text-center text-[2.5rem] font-extrabold">1259</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">-75%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">2207</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Average Handle Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">00:08:46</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">17%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">00:07:15</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Avg Engage/Talk Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">00:05:23</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">1%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">00:05:19</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Avg Hold Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">00:00:01</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">0%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">00:00:01</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">Avg Wrap Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">00:03:20</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">43%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">00:01:53</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">% Not Ready Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">0.00%</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">0%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">0.01%</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">% Ready Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">0.00%</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">0%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">0.01%</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">% Occupancy</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">0.00%</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">0%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">0.01%</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">% Engage/Talk Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">0.00%</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">0%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">0.01%</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">% Hold Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">0.00%</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">0%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">0.01%</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white">
+                        <div class="flex flex-col gap-1 p-2">
+                            <span class="text-center text-[1.2rem] text-[gray] font-bold">% Wrap Time</span>
+                            <span class="text-center text-[2.2rem] font-extrabold">0.00%</span>
+                            <div class="flex flex-row justify-evenly">
+                                <div class="flex flex-col">
+                                    <span class="text-[#36CF8A] font-bold">0%</span>
+                                    <span class="">Change</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-bold">0.01%</span>
+                                    <span class="">Prev</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard-interactions-by-agent"
+            class="z-[50] fixed top-0 left-full w-full min-h-dvh bg-[#E9E9EF] flex flex-col p-[clamp(1rem,1vw,1vw)]">
+            <div class="flex flex-row justify-between items-center border-b border-[#ccc] mb-5">
+                <div id="container-title-dashboard-2" class="flex flex-row gap-4 items-center mb-3">
+                    <h1 class="text-[clamp(2rem,2vw,2vw)] font-bold">Agent: Juan</h1>
+                </div>
+                <svg id="close-dashboard-interactions-by-agent" xmlns="http://www.w3.org/2000/svg" width="30"
+                    height="30" fill="none" class="cursor-pointer" viewBox="0 0 24 24" stroke="#9CA3AF">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <span class="text-black my-1 font-bold">Interactions</span>
+            <div class="w-full h-full">
+                <article class="bg-white h-full">
+                    <div id="mi-tabla-kendo-interactions" class="min-h-[15rem]"></div>
+                </article>
+            </div>
+        </section>
+
+        <script src="js/global.js" type="module"></script>
+        <script src="js/graphics.js" type="module"></script>
+        <script src="js/app.js" type="module"></script>
+        <script src="js/monitoring-card.js" type="module"></script>
+        <script src="js/interactions-card.js" type="module"></script>
+        <script src="js/dashboard-interactions-by-agent.js" type="module"></script>
+</body>
+
+</html>
