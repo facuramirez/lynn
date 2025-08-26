@@ -130,6 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
         template: "#= category #: #= value#%",
       },
     });
+
+    $(window).on("resize", function () {
+      $("#horizontal-bar-chart").data("kendoChart").resize();
+    });
   });
 
   $(document).ready(function () {
@@ -407,10 +411,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   $(document).ready(function () {
     $("#pie-chart").kendoChart({
-      chartArea: {
-        width: 290,
-        height: 290,
-      },
+      // chartArea: {
+      //   width: 240,
+      //   height: 240,
+      // },
       title: {
         text: "Distribución de Categorías",
       },
@@ -438,6 +442,10 @@ document.addEventListener("DOMContentLoaded", () => {
         visible: true,
         template: "#= category #: #= value#%",
       },
+    });
+
+    $(window).on("resize", function () {
+      $("#pie-chart").data("kendoChart").resize();
     });
   });
 

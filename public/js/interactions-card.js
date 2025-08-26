@@ -115,16 +115,24 @@ buttonOkInteractions.addEventListener("click", () => {
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>`
     );
+
+    if (state.workGroups.length === 1) {
+      const uniqueSvg = document.querySelector("svg[data-id]");
+      uniqueSvg.style.display = "none";
+    }
   });
 
   const svgs = document.querySelectorAll("svg[data-id]");
 
   svgs.forEach((svg) => {
     svg.addEventListener("click", () => {
-      if (state.workGroups.length === 1) return;
+      const id = svg.dataset.id; // obtenemos el valor de data-id
+
+      if (state.workGroups.length === 1) {
+        return;
+      }
       if (state.prevWorkGroups.length === 1) return;
 
-      const id = svg.dataset.id; // obtenemos el valor de data-id
       state.workGroups = state.workGroups.filter(
         (workGroup) => workGroup !== id
       );
@@ -134,7 +142,13 @@ buttonOkInteractions.addEventListener("click", () => {
       const span = document.getElementById(`${id}-span`);
       if (span) {
         span.remove();
+        if (state.workGroups.length === 1) {
+          const uniqueSvg = document.querySelector("svg[data-id]");
+          uniqueSvg.style.display = "none";
+        }
       }
+
+      //uniqueWorkGroup.querySelector("svg").style.display = "none";
     });
   });
 });
