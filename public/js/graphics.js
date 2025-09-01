@@ -489,6 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function viewInteractionsDetailByAgent() {
+    window.scrollTo({ top: 0 });
     dashboardInteractionsByAgent.classList.add("get-animation-dashboard");
     dashboardInteractionsByAgent.classList.remove(
       "get-animation-dashboard-out"
